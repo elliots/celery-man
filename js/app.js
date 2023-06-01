@@ -1,6 +1,8 @@
 var application = {
     video_dir: 'video',
 
+    user_name : new URLSearchParams(location.search).get('name') || 'Paul',
+
     celery: {
         title: 'Celery Man',
         windows: [
@@ -100,7 +102,7 @@ var application = {
 
             document
                 .querySelector('#window-prompt .window-content')
-                .innerHTML = 'Good morning Paul.';
+                .innerHTML = `Good morning ${app.user_name}.`;
         }
     },
 
@@ -242,6 +244,8 @@ var application = {
 
         ['celery', 'oyster', 'tayne', 'mozza']
             .forEach(source => this.addClicker(source));
+
+        this.clickCinco()
     },
     addClicker: function(source) {
         document
@@ -256,7 +260,11 @@ var application = {
 
         document
             .querySelector('#window-prompt .window-content')
-            .innerHTML = 'Good morning Paul.';
+            .innerHTML = `Good morning ${this.user_name}.`;
+
+        document
+            .querySelector('#window-prompt .title')
+            .innerHTML = `${this.user_name}'s COMPUTER`;
 
         this.embedStop();
         this.audioStop();
